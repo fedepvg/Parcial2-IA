@@ -13,6 +13,7 @@ public class MGrid : MonoBehaviour
 	float nodeDiameter;
 	int gridSizeX;
 	int gridSizeY;
+	List<Vector2> unwalkableNodes;
 
 	void Awake()
 	{
@@ -65,7 +66,6 @@ public class MGrid : MonoBehaviour
 		return neighbours;
 	}
 
-
 	public Node GetNodeFromWorldPosition(Vector3 worldPosition)
 	{
 		Vector3 worldBottomLeft = new Vector3(boxVolume.bounds.min.x, boxVolume.bounds.max.y, boxVolume.bounds.min.z);
@@ -81,5 +81,48 @@ public class MGrid : MonoBehaviour
 		int y = Mathf.Clamp(Mathf.RoundToInt((gridSizeY) * yPerc), 0, gridSizeY - 1);
 
 		return grid[x, y];
+	}
+
+	public Node TryGetRandomPoint(int maxAttempts, Node currentNode)
+    {
+		int xPos = Random.Range(0, gridSizeX - 1);
+		int yPos = Random.Range(0, gridSizeY - 1);
+
+		if (grid[xPos, yPos] != currentNode && grid[xPos, yPos].walkable)
+			return grid[xPos, yPos];
+		else if (maxAttempts > 0)
+			return TryGetRandomPoint(--maxAttempts, currentNode);
+		else
+			return currentNode;
+
+	}
+
+	public Path path;
+	void OnDrawGizmos()
+	{
+		//Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+		boxVolume = GetComponent<BoxCollider>();
+		Gizmos.DrawWireCube(transform.position, new Vector3(boxVolume.bounds.size.x, boxVolume.bounds.size.y, boxVolume.bounds.size.z));
+
+		if (grid != null)
+		{
+			foreach (Node n in grid)
+			{
+				Gizmos.color = (n.walkable) ? Color.white : Color.red;
+				if (path.pathExists)
+				{
+					if (path.nodeList.Contains(n))
+					{
+						if (path.start == n)
+							Gizmos.color = Color.blue;
+						else if (path.target == n)
+							Gizmos.color = Color.green;
+						else
+							Gizmos.color = Color.black;
+					}
+				}
+				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+			}
+		}
 	}
 }

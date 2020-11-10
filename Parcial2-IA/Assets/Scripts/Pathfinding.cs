@@ -13,20 +13,37 @@ public struct Path
 
 public class Pathfinding : MonoBehaviour
 {
-	public Transform seeker, target;
 	MGrid grid;
+	
+	public float distanceToReachNode;
+
+	public Transform seeker, target;
 	public Vector2 currentStart;
 	public Vector2 currentTarget;
+	public int maxAttemptsToGetRandomPoint;
+	
+
+	private static Pathfinding instance;
+
+	public static Pathfinding Instance
+	{
+		get { return instance; }
+	}
 
 	void Awake()
 	{
+		if (instance == null)
+			instance = this as Pathfinding;
+		else
+			Destroy(gameObject);
+
 		grid = GetComponent<MGrid>();
 	}
 
 	void Update()
 	{ 
 		//if(Input.GetKeyDown(KeyCode.Space))
-			FindPath(seeker.position, target.position);
+			//FindPath(seeker.position, target.position);
 	}
 
 	Path FindPath(Vector3 startPos, Vector3 targetPos)
@@ -66,6 +83,7 @@ public class Pathfinding : MonoBehaviour
 			{
 				currentPath.nodeList = new List<Node>(RetracePath(startNode, endNode));
 				currentPath.pathExists = true;
+				grid.path = currentPath;
 				return currentPath;
 			}
 
@@ -105,4 +123,30 @@ public class Pathfinding : MonoBehaviour
 	{
 		return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
 	}
+
+	public bool ReachedNode(Node node, Vector3 position)
+    {
+		Vector2 startPos = new Vector2(node.worldPosition.x, node.worldPosition.z);
+		Vector2 targetPos = new Vector2(position.x, position.z);
+
+		if(Vector2.Distance(startPos, targetPos) <= distanceToReachNode)
+			return true;
+
+		return false;
+    }
+
+	public bool TryGetPathToRandomPoint(Vector3 currentPosition, ref Path path)
+    {
+		Node currentNode = grid.GetNodeFromWorldPosition(currentPosition);
+
+		Node target = grid.TryGetRandomPoint(maxAttemptsToGetRandomPoint, currentNode);
+
+		if (target != currentNode)
+		{
+			path = FindPath(currentNode.worldPosition, target.worldPosition);
+			return true;
+		}
+
+		return false;
+    }
 }
