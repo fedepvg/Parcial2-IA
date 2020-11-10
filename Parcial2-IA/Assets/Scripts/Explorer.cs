@@ -8,7 +8,6 @@ public class Explorer : PathfindingAgent
     override protected void Start()
     {
         base.Start();
-        GetPathToRandomLocation();
     }
 
     // Update is called once per frame

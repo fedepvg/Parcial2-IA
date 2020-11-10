@@ -11,6 +11,9 @@ public class PathfindingAgent : MonoBehaviour
     public float speed;
     public Vector3 targetPos;
 
+    public delegate void OnEndNodeReached();
+    public static OnEndNodeReached endNodeReachedAction;
+
     private void Awake()
     {
         currentPath = new Path();
@@ -25,13 +28,11 @@ public class PathfindingAgent : MonoBehaviour
     // Update is called once per frame
     virtual protected void Update()
     {
-        if (pathExists)
-            FollowPath();
-        else
-            GetPathToRandomLocation();
+        //if (pathExists)
+        //    FollowPath();
     }
 
-    protected void FollowPath()
+    public void FollowPath()
     {
         if (currentPath.pathExists)
         {
@@ -46,14 +47,19 @@ public class PathfindingAgent : MonoBehaviour
             {
                 currentPath.nodeList.RemoveAt(0);
                 if (currentPath.nodeList.Count <= 0)
+                {
                     pathExists = false;
+
+                    if (endNodeReachedAction != null)
+                        endNodeReachedAction();
+                }
             }
         }
         else
             pathExists = false;
     }
 
-    protected void GetPathToRandomLocation()
+    public void GetPathToRandomLocation()
     {
         pathExists = pathfinding.TryGetPathToRandomPoint(transform.position, ref currentPath);
         targetPos = currentPath.target.worldPosition;
