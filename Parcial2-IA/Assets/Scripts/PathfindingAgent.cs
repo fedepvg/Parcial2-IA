@@ -62,6 +62,7 @@ public class PathfindingAgent : MonoBehaviour
     public void GetPathToRandomLocation()
     {
         pathExists = pathfinding.TryGetPathToRandomPoint(transform.position, ref currentPath);
-        targetPos = currentPath.target.worldPosition;
+        if(currentPath.pathExists)
+            targetPos = currentPath.target.worldPosition;
     }
 }
