@@ -11,17 +11,6 @@ public class Miner : PathfindingAgent
 
     float currentGold;
 
-    override protected void Start()
-    {
-        base.Start();
-
-    }
-
-    override protected void Update()
-    {
-        base.Update();
-    }
-
     public void Mine(float minedGold)
     {
         currentGold += minedGold;

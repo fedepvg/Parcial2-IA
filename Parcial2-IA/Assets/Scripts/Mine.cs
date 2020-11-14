@@ -13,7 +13,6 @@ public class Mine : MonoBehaviour
     public OnMineDestroy onMineDestroyAction;
 
     public float remainingGold;
-    bool isBeingExplored = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +35,6 @@ public class Mine : MonoBehaviour
     public void BeginExploration()
     {
         gameObject.layer = LayerMask.NameToLayer("ExploredMine");
-        isBeingExplored = true;
         if (onBeginExplorationAction != null)
             onBeginExplorationAction();
     }

@@ -31,7 +31,6 @@ public class MiningBehaviour : StateMachineBehaviour
         if(isMining)
         {
             owner.Mine(owner.mineRef.TakeGold(owner.goldToTakePerSecond * Time.deltaTime));
-            Debug.Log("Mining");
             if (owner.IsFull())
                 EndMining(animator);
 

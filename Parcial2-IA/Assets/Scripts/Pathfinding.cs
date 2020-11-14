@@ -42,12 +42,6 @@ public class Pathfinding : MonoBehaviour
 		grid = GetComponent<MGrid>();
 	}
 
-	void Update()
-	{ 
-		//if(Input.GetKeyDown(KeyCode.Space))
-			//FindPath(seeker.position, target.position);
-	}
-
 	public Path FindPath(Vector3 startPos, Vector3 targetPos)
 	{
 		Path currentPath = new Path();

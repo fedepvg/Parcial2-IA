@@ -31,10 +31,6 @@ public class PatrolBehaviour : StateMachineBehaviour
             animator.SetTrigger("foundMine");
             owner.FindPath(target.transform.position);
         };
-
-        //owner.GetPathToRandomLocation();
-        //PathfindingAgent.endNodeReachedAction = () => { animator.SetTrigger("foundMine"); };
-        Debug.Log("patrol entered");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

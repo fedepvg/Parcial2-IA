@@ -12,9 +12,6 @@ public class PathfindingAgent : MonoBehaviour
     public float speed;
     public Vector3 targetPos;
 
-    //public delegate void OnEndNodeReached();
-    //public static OnEndNodeReached endNodeReachedAction;
-
     private void Awake()
     {
         currentPath = new Path();
@@ -25,13 +22,6 @@ public class PathfindingAgent : MonoBehaviour
     virtual protected void Start()
     {
         pathfinding = Pathfinding.Instance;
-    }
-
-    // Update is called once per frame
-    virtual protected void Update()
-    {
-        //if (pathExists)
-        //    FollowPath();
     }
 
     public void FollowPath()

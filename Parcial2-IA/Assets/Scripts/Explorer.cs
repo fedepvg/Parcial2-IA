@@ -16,11 +16,6 @@ public class Explorer : PathfindingAgent
          };
     }
 
-    override protected void Update()
-    {
-        base.Update();
-    }
-
     public void MarkMine()
     {
         Instantiate(mineFlagPrefab, transform.position, transform.rotation, mineRef.transform);

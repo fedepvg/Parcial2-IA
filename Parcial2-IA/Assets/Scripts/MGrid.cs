@@ -37,7 +37,6 @@ public class MGrid : MonoBehaviour
 			for (int y = 0; y < gridSizeY; y++)
 			{
 				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-				//bool walkable = Random.Range(0f, 1f) < 0.85f ? true : false;
 				bool walkable =  !Physics.CheckSphere(worldPoint, nodeRadius * .99f, unwalkableMask);
 				grid[x, y] = new Node(walkable, worldPoint, x, y);
 			}
@@ -102,7 +101,6 @@ public class MGrid : MonoBehaviour
 	public Path path;
 	void OnDrawGizmos()
 	{
-		//Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
 		boxVolume = GetComponent<BoxCollider>();
 		Gizmos.DrawWireCube(transform.position, new Vector3(boxVolume.bounds.size.x, boxVolume.bounds.size.y, boxVolume.bounds.size.z));
 

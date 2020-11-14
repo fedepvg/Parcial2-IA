@@ -14,7 +14,7 @@ public class ReturnBehaviour : StateMachineBehaviour
         owner.FindPath(owner.baseRef.transform.position, ()=>
         {
             animator.SetTrigger("reachedBase");
-            owner.DropGold();
+            GoldManager.Instance.AddGold(owner.DropGold());
         });
     }
 
