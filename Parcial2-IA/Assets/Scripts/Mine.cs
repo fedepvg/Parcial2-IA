@@ -12,7 +12,7 @@ public class Mine : MonoBehaviour
     public delegate void OnMineDestroy();
     public OnMineDestroy onMineDestroyAction;
 
-    int remainingGold;
+    public float remainingGold;
     bool isBeingExplored = false;
 
     // Start is called before the first frame update
@@ -41,8 +41,15 @@ public class Mine : MonoBehaviour
             onBeginExplorationAction();
     }
 
-    public int TakeGold(int maxToTake)
+    public float TakeGold(float maxToTake)
     {
-        return Mathf.Clamp(maxToTake, 0, remainingGold);
+        float goldToTake = Mathf.Clamp(maxToTake, 0, remainingGold);
+        remainingGold -= goldToTake;
+        return goldToTake;
+    }
+
+    public bool IsEmpty()
+    {
+        return remainingGold <= 0;
     }
 }

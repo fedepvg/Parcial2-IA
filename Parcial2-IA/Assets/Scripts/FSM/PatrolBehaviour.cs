@@ -15,9 +15,21 @@ public class PatrolBehaviour : StateMachineBehaviour
 
         owner.visionCone.onTargetFoundAction += (GameObject target) =>
         {
+            if (owner.GetType() == typeof(Miner))
+            {
+                Miner miner = owner.GetComponent<Miner>();
+                miner.mineRef = target.GetComponent<Mine>();
+                animator.SetBool("mineStillActive", true);
+                miner.mineRef.onMineDestroyAction += () =>
+                {
+                    miner.mineRef = null;
+                    if(animator != null)
+                        animator.SetBool("mineStillActive", false);
+                };
+            }
+
             animator.SetTrigger("foundMine");
             owner.FindPath(target.transform.position);
-            target.GetComponent<Mine>().BeginExploration();
         };
 
         //owner.GetPathToRandomLocation();

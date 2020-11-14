@@ -5,22 +5,25 @@ using UnityEngine;
 public class Explorer : PathfindingAgent
 {
     public GameObject mineFlagPrefab;
+    public Mine mineRef;
 
-    // Start is called before the first frame update
     override protected void Start()
     {
         base.Start();
-        
+        visionCone.onTargetFoundAction += (GameObject target) =>
+         {
+             mineRef = target.GetComponent<Mine>();
+         };
     }
 
-    // Update is called once per frame
     override protected void Update()
     {
         base.Update();
     }
 
-    public void PutFlag()
+    public void MarkMine()
     {
-        Instantiate(mineFlagPrefab, transform.position, transform.rotation);
+        Instantiate(mineFlagPrefab, transform.position, transform.rotation, mineRef.transform);
+        mineRef.BeginExploration();
     }
 }

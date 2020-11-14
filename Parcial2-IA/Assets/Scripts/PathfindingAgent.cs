@@ -8,8 +8,6 @@ public class PathfindingAgent : MonoBehaviour
     public Path currentPath;
     public bool pathExists = false;
     public VisionCone visionCone;
-
-    protected Animator stateMachine;
     
     public float speed;
     public Vector3 targetPos;
@@ -21,7 +19,6 @@ public class PathfindingAgent : MonoBehaviour
     {
         currentPath = new Path();
         visionCone = GetComponent<VisionCone>();
-        stateMachine = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
