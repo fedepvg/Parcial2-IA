@@ -32,7 +32,7 @@ public class MineManager : MonoBehaviour
             if (mineNode != null)
             {
                 GameObject mine = Instantiate(minePrefab, mineNode.worldPosition, Quaternion.identity);
-                unexploredMines.Add(Instantiate(minePrefab, mineNode.worldPosition, Quaternion.identity));
+                unexploredMines.Add(mine);
                 Mine mineComponent = mine.GetComponent<Mine>();
                 mineComponent.onBeginExplorationAction = () =>
                 {

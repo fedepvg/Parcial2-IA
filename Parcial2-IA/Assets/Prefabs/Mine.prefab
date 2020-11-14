@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4008120067207450660}
   - component: {fileID: 4527184016155008662}
   - component: {fileID: 6202274776986449230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mine
-  m_TagString: unexplored
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,4 +109,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minGoldAmount: 15
   maxGoldAmount: 20
-  foundMineTag: explored

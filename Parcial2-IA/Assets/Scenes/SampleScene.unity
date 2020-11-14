@@ -438,6 +438,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582577303}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &584424062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584424064}
+  - component: {fileID: 584424063}
+  m_Layer: 0
+  m_Name: MineManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &584424063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584424062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d8365c132e5c948b8628a8d451136d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minePrefab: {fileID: 255886377822802190, guid: b3ac843167bad264ba1f6ba018b267a7,
+    type: 3}
+  maxUnexploredMines: 3
+  mineSpawnCooldown: 1
+--- !u!4 &584424064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584424062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.0811405, y: -3.1759827, z: 4.0144424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697236794
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,9 +995,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathExists: 0
+  visionCone: {fileID: 0}
   speed: 5
   targetPos: {x: 0, y: 0, z: 0}
-  mineFlagPrefab: {fileID: 0}
+  mineFlagPrefab: {fileID: 6646604114408958507, guid: bcb8e3619c68a304db3034fb9b082c7d,
+    type: 3}
 --- !u!95 &1127699362
 Animator:
   serializedVersion: 3
@@ -986,7 +1035,7 @@ MonoBehaviour:
   viewAngle: 90
   targetMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256

@@ -17,6 +17,7 @@ public class PatrolBehaviour : StateMachineBehaviour
         {
             animator.SetTrigger("foundMine");
             owner.FindPath(target.transform.position);
+            target.GetComponent<Mine>().BeginExploration();
         };
 
         //owner.GetPathToRandomLocation();
