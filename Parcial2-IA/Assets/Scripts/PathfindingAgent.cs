@@ -5,18 +5,23 @@ using UnityEngine;
 public class PathfindingAgent : MonoBehaviour
 {
     Pathfinding pathfinding;
-    Path currentPath;
+    public Path currentPath;
     public bool pathExists = false;
+    public VisionCone visionCone;
 
+    protected Animator stateMachine;
+    
     public float speed;
     public Vector3 targetPos;
 
-    public delegate void OnEndNodeReached();
-    public static OnEndNodeReached endNodeReachedAction;
+    //public delegate void OnEndNodeReached();
+    //public static OnEndNodeReached endNodeReachedAction;
 
     private void Awake()
     {
         currentPath = new Path();
+        visionCone = GetComponent<VisionCone>();
+        stateMachine = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -42,6 +47,7 @@ public class PathfindingAgent : MonoBehaviour
             Vector3 dirVector = targetPos - startPos;
             dirVector.Normalize();
             transform.position += dirVector * speed * Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVector, Vector3.up), 1);
 
             if (pathfinding.ReachedNode(currentPath.nodeList[0], transform.position))
             {
@@ -50,13 +56,21 @@ public class PathfindingAgent : MonoBehaviour
                 {
                     pathExists = false;
 
-                    if (endNodeReachedAction != null)
-                        endNodeReachedAction();
+                    if (currentPath.onEndPathDelegate != null)
+                        currentPath.onEndPathDelegate();
                 }
             }
         }
         else
             pathExists = false;
+    }
+
+    public void FindPath(Vector3 targetLocation, Path.OnEndPath endPathDelegate = null)
+    {
+        currentPath = pathfinding.FindPath(transform.position, targetLocation);
+        pathExists = true;
+        if(endPathDelegate != null)
+            currentPath.onEndPathDelegate = endPathDelegate;
     }
 
     public void GetPathToRandomLocation()

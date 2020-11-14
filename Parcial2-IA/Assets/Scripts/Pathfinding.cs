@@ -9,6 +9,8 @@ public struct Path
 	public Node start;
 	public Node target;
 	public List<Node> nodeList;
+	public delegate void OnEndPath();
+	public OnEndPath onEndPathDelegate;
 }
 
 public class Pathfinding : MonoBehaviour
@@ -46,7 +48,7 @@ public class Pathfinding : MonoBehaviour
 			//FindPath(seeker.position, target.position);
 	}
 
-	Path FindPath(Vector3 startPos, Vector3 targetPos)
+	public Path FindPath(Vector3 startPos, Vector3 targetPos)
 	{
 		Path currentPath = new Path();
 
@@ -141,7 +143,7 @@ public class Pathfinding : MonoBehaviour
 
 		Node target = grid.TryGetRandomPoint(maxAttemptsToGetRandomPoint, currentNode);
 
-		if (target != currentNode)
+		if (target != null)
 		{
 			path = FindPath(currentNode.worldPosition, target.worldPosition);
 			return true;
@@ -149,4 +151,9 @@ public class Pathfinding : MonoBehaviour
 
 		return false;
     }
+
+	public Node TryGetRandomFreeNode()
+	{
+		return grid.TryGetRandomPoint(maxAttemptsToGetRandomPoint, null);
+	}
 }

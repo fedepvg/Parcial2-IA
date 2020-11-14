@@ -95,7 +95,7 @@ public class MGrid : MonoBehaviour
 		else if (maxAttempts > 0)
 			return TryGetRandomPoint(--maxAttempts, currentNode);
 		else
-			return currentNode;
+			return null;
 
 	}
 

@@ -13,6 +13,12 @@ public class PatrolBehaviour : StateMachineBehaviour
 
         owner = animator.GetComponent<PathfindingAgent>();
 
+        owner.visionCone.onTargetFoundAction += (GameObject target) =>
+        {
+            animator.SetTrigger("foundMine");
+            owner.FindPath(target.transform.position);
+        };
+
         //owner.GetPathToRandomLocation();
         //PathfindingAgent.endNodeReachedAction = () => { animator.SetTrigger("foundMine"); };
         Debug.Log("patrol entered");
@@ -23,6 +29,7 @@ public class PatrolBehaviour : StateMachineBehaviour
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+        owner.visionCone.FindVisibleTargets();
 
         if (!owner.pathExists)
             owner.GetPathToRandomLocation();
@@ -34,19 +41,5 @@ public class PatrolBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-
-        owner.pathExists = false;
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }
