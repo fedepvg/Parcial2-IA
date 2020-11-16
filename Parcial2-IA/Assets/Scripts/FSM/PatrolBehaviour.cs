@@ -19,6 +19,7 @@ public class PatrolBehaviour : StateMachineBehaviour
             {
                 Miner miner = owner.GetComponent<Miner>();
                 miner.mineRef = target.GetComponent<Mine>();
+                miner.mineRef.gameObject.layer = LayerMask.NameToLayer("OccuppiedMine");
                 animator.SetBool("mineStillActive", true);
                 miner.mineRef.onMineDestroyAction += () =>
                 {
