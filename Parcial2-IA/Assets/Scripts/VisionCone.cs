@@ -14,7 +14,12 @@ public class VisionCone : MonoBehaviour
 	public delegate void OnTargetFound(GameObject target);
 	public OnTargetFound onTargetFoundAction;
 
-    public void FindVisibleTargets()
+	public delegate void OnTargetLost();
+	public OnTargetLost onTargetLost;
+
+	bool targetExists = false;
+
+	public void FindVisibleTargets()
 	{
 		Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
@@ -28,9 +33,16 @@ public class VisionCone : MonoBehaviour
 
 				if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
 				{
+					targetExists = true;
 					if (onTargetFoundAction != null)
 						onTargetFoundAction(target.gameObject);
 				}
+				else if(targetExists)
+                {
+					targetExists = false;
+					if (onTargetLost != null)
+						onTargetLost();
+                }
 			}
 		}
 	}	

@@ -48,6 +48,6 @@ public class Mine : MonoBehaviour
 
     public bool IsEmpty()
     {
-        return remainingGold <= 0;
+        return (int)remainingGold <= 0;
     }
 }

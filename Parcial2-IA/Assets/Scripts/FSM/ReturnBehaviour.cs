@@ -16,6 +16,8 @@ public class ReturnBehaviour : StateMachineBehaviour
             animator.SetTrigger("reachedBase");
             GoldManager.Instance.AddGold(owner.DropGold());
         });
+
+        owner.gameObject.layer = LayerMask.NameToLayer("FullMiner");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,6 +30,6 @@ public class ReturnBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        owner.gameObject.layer = LayerMask.NameToLayer("Miner");
     }
 }

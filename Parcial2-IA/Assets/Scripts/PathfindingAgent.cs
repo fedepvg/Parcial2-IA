@@ -12,7 +12,7 @@ public class PathfindingAgent : MonoBehaviour
     public float speed;
     public Vector3 targetPos;
 
-    private void Awake()
+    virtual protected void Awake()
     {
         currentPath = new Path();
         visionCone = GetComponent<VisionCone>();
@@ -58,6 +58,9 @@ public class PathfindingAgent : MonoBehaviour
         pathExists = true;
         if(endPathDelegate != null)
             currentPath.onEndPathDelegate = endPathDelegate;
+
+        if (currentPath.nodeList.Count > 1)
+            currentPath.nodeList.RemoveAt(0);
     }
 
     public void GetPathToRandomLocation()

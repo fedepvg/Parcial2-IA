@@ -9,12 +9,8 @@ using Pada1.BBCore.Framework;
 [Condition("IsMinerNear")]
 public class IsMinerNear : ConditionBase
 {
-    [InParam("ThisEnemmy")]
+    [InParam("ThisEnemy")]
     public GameObject thisGO;
-
-    [InParam("Miner")]
-    public GameObject MinerGO;
-
 
     public override bool Check()
     {

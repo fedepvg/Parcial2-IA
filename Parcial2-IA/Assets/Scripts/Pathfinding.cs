@@ -120,6 +120,11 @@ public class Pathfinding : MonoBehaviour
 		return Vector3.Distance(nodeA.worldPosition, nodeB.worldPosition);
 	}
 
+	public Node GetNode(Vector3 position)
+    {
+		return grid.GetNodeFromWorldPosition(position);
+    }
+
 	public bool ReachedNode(Node node, Vector3 position)
     {
 		Vector2 startPos = new Vector2(node.worldPosition.x, node.worldPosition.z);
