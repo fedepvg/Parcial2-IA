@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : PathfindingAgent
 {
     public bool isMinerNear = false;
     public GameObject target;
     public int maxGold;
+    public Canvas canvas;
+    public TextMeshProUGUI text;
 
 
     public delegate void OnEnemyDestroyed();
@@ -45,6 +49,10 @@ public class Enemy : PathfindingAgent
         }
 
         visionCone.FindVisibleTargets();
+
+        canvas.transform.LookAt(canvas.transform.position + Vector3.forward);
+        int gold = (int)currentGold;
+        text.text = gold.ToString();
     }
 
     void OnMinerFound(GameObject target)

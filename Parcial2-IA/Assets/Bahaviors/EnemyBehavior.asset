@@ -39,7 +39,7 @@ MonoBehaviour:
     <ActionNode id=\"2\" />\r\n            </child>\r\n          </GuardAndNode>\r\n       
     </elem>\r\n      </children>\r\n      <inputParams />\r\n      <outputParams
     />\r\n      <localParams />\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode
-    id=\"19\" policy=\"WAIT_UNTIL_TRUE_AND_COMPLETE\" name=\"IsEnemyFull\">\r\n     
+    id=\"19\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"IsEnemyFull\">\r\n     
     <inputParams>\r\n        <inputValues>\r\n          <entry name=\"ThisEnemmy\"
     type=\"UnityEngine.GameObject\" isBlackboard=\"True\" blackboard=\"ThisEnemy\"
     />\r\n          <entry name=\"Condition\" type=\"System.Boolean\" isBlackboard=\"False\"

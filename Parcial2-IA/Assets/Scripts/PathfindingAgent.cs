@@ -59,8 +59,11 @@ public class PathfindingAgent : MonoBehaviour
         if(endPathDelegate != null)
             currentPath.onEndPathDelegate = endPathDelegate;
 
-        if (currentPath.nodeList.Count > 1)
-            currentPath.nodeList.RemoveAt(0);
+        if (currentPath.nodeList != null)
+        {
+            if (currentPath.nodeList.Count > 1)
+                currentPath.nodeList.RemoveAt(0);
+        }
     }
 
     public void GetPathToRandomLocation()

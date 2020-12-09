@@ -12,6 +12,7 @@ public class PatrolBehaviour : StateMachineBehaviour
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         owner = animator.GetComponent<PathfindingAgent>();
+        owner.pathExists = false;
 
         owner.visionCone.onTargetFoundAction += (GameObject target) =>
         {

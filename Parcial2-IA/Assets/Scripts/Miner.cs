@@ -32,9 +32,9 @@ public class Miner : PathfindingAgent
     public void Mine(float minedGold)
     {
         if (minedGold > 0)
-        {
             currentGold += minedGold;
-        }
+        else
+            GetComponent<Animator>().SetTrigger("reachedBase");
     }
 
     public bool IsFull()

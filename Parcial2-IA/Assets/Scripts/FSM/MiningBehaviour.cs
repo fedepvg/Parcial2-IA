@@ -12,10 +12,7 @@ public class MiningBehaviour : StateMachineBehaviour
     {
         owner = animator.GetComponent<Miner>();
 
-        if (!owner.pathExists)
-        {
-            owner.FindPath(owner.mineRef.transform.position);
-        }
+        owner.FindPath(owner.mineRef.transform.position);
 
         owner.currentPath.onEndPathDelegate += () =>
         {
